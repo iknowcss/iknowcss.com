@@ -3,13 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>iknowCSS.com</title>
-  <script src="resource/js/vendor/d3.min.js"></script>
-  <style type="text/css">
-    body { padding: 0; margin: 0; }
-  </style>
+  <link rel="stylesheet" type="text/css" href="public/css/reset.css">
 </head>
 <body>
-  <svg id="main-svg" width="800" height="600"></svg>
-  <script src="resource/js/rule-30.js"></script>
+  <header>
+    <canvas id="wolfram-canvas" width="1000" height="600"></canvas>
+  </header>
+
+  <!-- Scripts -->
+  <script src="public/vendor/js/lodash.min.js"></script>
+  <script src="public/js/app.js"></script>
+  <script src="public/js/rule-30.js"></script>
+  <script>
+    (function () {
+      // var runner = new ik.WolframRunner('0000000001000000000');
+
+      // for (var i = 0; i < 10; i++) {
+      //   console.log(runner.current.map(function (d) {
+      //     return d ? '∂' : ' ';
+      //   }).join(''));
+      //   runner.step();
+      // }
+
+      var canvas = document.getElementById('wolfram-canvas'),
+          painter = new ik.WolframPainter(canvas, 5);
+
+      setTimeout(function () {
+        painter.paintWithRunner(new ik.WolframRunner('00000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000'), 50, 20);
+        painter.reset();
+      }, 0);
+
+      setTimeout(function () {
+        painter.paintWithRunner(new ik.WolframRunner('00000000000000000000000000000000000000000000000000000000001000000000001000000000000000000000000000000000000000000000'), 50, 20);
+        painter.reset();
+      }, 2000);
+
+
+    }());
+  </script>
 </body>
 </html>
