@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>iknowCSS.com</title>
+  <link rel="stylesheet" type="text/css" href="public/css/reset.css">
+</head>
+<body>
+
+  <div><input id="rule-number" value="184"></div>
+  <div>
+    <button id="random-ic">Random IC</button>
+    <button id="midpoint-ic">Midpoint IC</button>
+  </div>
+
+  <main>
+    <canvas id="wolfram-canvas" width="1000" height="1000"></canvas>
+  </main>
+
+  <!-- Scripts -->
+  <script src="public/vendor/js/lodash.min.js"></script>
+  <script src="public/js/app.js"></script>
+  <script src="public/js/rule-30.js"></script>
+  <script>
+    (function () {
+
+      var runner = new ik.WolframRunner(184, 500),
+          painter = new ik.WolframPainter(document.getElementById('wolfram-canvas'), 2),
+          runType = 'random';
+      
+      function run() {
+        var rule = parseInt(document.getElementById('rule-number').value, 10);
+
+        painter.reset();
+        runner = new ik.WolframRunner(rule, 500);
+
+        switch (runType) {
+          case 'random':
+            runner.current.each(function (d, i) {
+              runner.current.set(i, Math.random() < 0.5 ? 1 : 0);
+            });
+            break;
+          case 'midpoint':
+          console.log(runner.current.length / 2);
+            runner.current.set(Math.floor(runner.current.length / 2), true);
+            break;
+          default:
+            break;
+        }
+
+
+        painter.paintWithRunnerInterval(runner, 300, [0, 0, 0], 1);
+      }
+
+      // document.getElementById('rule-number').addEventListener('keyup', run);
+
+      document.getElementById('random-ic')
+        .addEventListener('click', function () {
+          runType = 'random';
+          run();
+        });
+
+      document.getElementById('midpoint-ic')
+        .addEventListener('click', function () {
+          runType = 'midpoint';
+          run();
+        });
+
+      //////////////////////////////////////////////////////////////////////////
+
+      // runner.current.set(Math.floor(runner.current.length / 2), 1);
+      // runner.current.each(function (d, i) {
+      //   runner.current.set(i, Math.random() < 0.5 ? 1 : 0)
+      // });
+      // painter.paintWithRunnerInterval(runner, 1000, [0, 0, 0], 1);
+
+      // setTimeout(function () {
+        // runner.reset();
+        // runner.current.toggle(Math.floor(runner.current.length / 2), 1);
+
+        // painter.reset();
+        // painter.paintWithRunnerInterval(runner, 1000, [255, 0, 0], 1);
+      // }, 5000);
+
+      // setTimeout(function () {
+      //   runner.reset();
+      //   runner.current.toggle(Math.floor(runner.current.length / 3), 1);
+
+      //   painter.reset();
+      //   painter.paintWithRunnerInterval(runner, 200, null, 1);
+      // }, 4000);
+    }());
+  </script>
+</body>
+</html>

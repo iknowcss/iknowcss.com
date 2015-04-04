@@ -13,14 +13,18 @@
     this.blockCount = Math.ceil(this.length / WORD);
 
     // Create array of bit blocks and zero them out
-    this.blocks = new Array(this.blockCount);
-    _.each(this.blocks, function (b, i) {
-      this.blocks[i] = 0;
-    }, this);
+    if (cols instanceof WolframRow) {
+      this.blocks = _.clone(cols.blocks);
+    } else {
+      this.blocks = new Array(this.blockCount);
+      _.each(this.blocks, function (b, i) {
+        this.blocks[i] = 0;
+      }, this);
 
-    // Init
-    if (!_.isNumber(cols)) {
-      this.setRange(cols);
+      // Init
+      if (!_.isNumber(cols)) {
+        this.setRange(cols);
+      }
     }
   }
 
@@ -92,11 +96,12 @@
 
   ik.WolframRunner = WolframRunner;
 
-  function WolframRunner(seed) {
+  function WolframRunner(rule, seed) {
     if (!(this instanceof WolframRunner)) {
       return new WolframRunner(seed);
     }
 
+    this.rule = rule;
     this.initial = this.current = new WolframRow(seed);
     this.reset();
   }
@@ -108,8 +113,8 @@
       this.previous = this.current;
       this.current = new WolframRow(len);
       this.previous.slide(function (p, q, r, i) {
-        var value = (p + q + r + q * r) % 2 === 1;
-        // var value = (q + r + q * r + p * q * r) % 2 === 1;
+        var a = (!p << 2) + (!q << 1) + !r,
+            value = (1 << (7 - a) & this.rule) > 0;
         this.current.set(i, value);
       }, this);
       return this.current;
@@ -166,7 +171,6 @@
         // Skip painting pixels that were already painted as "on"
         var paintedRow = this.painted[this.scanLine];
         if (d && paintedRow && paintedRow.get(i)) {
-          console.log('no at ' + i + ', ' + this.scanLine)
           return;
         }
 
