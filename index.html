@@ -7,7 +7,7 @@
 </head>
 <body>
   <header>
-    <canvas id="wolfram-canvas" width="1000" height="600"></canvas>
+    <canvas id="wolfram-canvas" width="1000" height="2000"></canvas>
   </header>
 
   <!-- Scripts -->
@@ -16,29 +16,31 @@
   <script src="public/js/rule-30.js"></script>
   <script>
     (function () {
-      // var runner = new ik.WolframRunner('0000000001000000000');
 
-      // for (var i = 0; i < 10; i++) {
-      //   console.log(runner.current.map(function (d) {
-      //     return d ? '∂' : ' ';
-      //   }).join(''));
-      //   runner.step();
-      // }
+      var runner = new ik.WolframRunner(1000),
+          painter = new ik.WolframPainter(document.getElementById('wolfram-canvas'), 1);
 
-      var canvas = document.getElementById('wolfram-canvas'),
-          painter = new ik.WolframPainter(canvas, 5);
+      // runner.current.set(Math.floor(runner.current.length / 2), 1);
+      runner.current.each(function (d, i) {
+        runner.current.set(i, Math.random() < 0.5 ? 1 : 0)
+      });
+      painter.paintWithRunnerInterval(runner, 1000, [128, 128, 128], 1);
 
-      setTimeout(function () {
-        painter.paintWithRunner(new ik.WolframRunner('00000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000'), 50, 20);
-        painter.reset();
-      }, 0);
+      // setTimeout(function () {
+      //   runner.reset();
+      //   runner.current.toggle(Math.floor(2 * runner.current.length / 3), 1);
 
-      setTimeout(function () {
-        painter.paintWithRunner(new ik.WolframRunner('00000000000000000000000000000000000000000000000000000000001000000000001000000000000000000000000000000000000000000000'), 50, 20);
-        painter.reset();
-      }, 2000);
+      //   painter.reset();
+      //   painter.paintWithRunnerInterval(runner, 800, [255, 128, 128], 1);
+      // }, 5000);
 
+      // setTimeout(function () {
+      //   runner.reset();
+      //   runner.current.toggle(Math.floor(runner.current.length / 3), 1);
 
+      //   painter.reset();
+      //   painter.paintWithRunnerInterval(runner, 200, null, 1);
+      // }, 4000);
     }());
   </script>
 </body>
