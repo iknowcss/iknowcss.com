@@ -1,0 +1,10 @@
+@mixin speech-bubble($radius: 5px) {
+    $sides: top-left top-right bottom-right;
+    
+    @each $side in $sides {
+        border-#{$side}-radius: $radius;
+        -webkit-border-#{$side}: $radius;
+    }
+    border-style: solid;
+    border-width: 1px;
+}

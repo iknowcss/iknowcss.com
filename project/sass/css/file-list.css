@@ -1,0 +1,19 @@
+#filelist {
+    width: 100%;
+    background-color: #ccc;
+    border-bottom: 1px solid #666;
+    padding: 10px;
+}
+#filelist h2 {
+    margin: 0px;
+}
+#filelist ul {
+    margin: 0px 0px 0px 1.2em;
+    padding: 0px;
+}
+#filelist a {
+    text-decoration: none;
+}
+#filelist a:hover {
+    text-decoration: underline;
+}

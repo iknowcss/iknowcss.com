@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <script type="text/javascript">
+
+        window.onload = function () {
+
+            var root = this
+
+              , supportsDeviceOrientation = !!root.DeviceOrientationEvent
+
+              , alphaOut = document.getElementById("alpha-out")
+              , betaOut = document.getElementById("beta-out")
+              , gammaOut = document.getElementById("gamma-out");
+
+            // Make sure the browser supports it
+            if (!supportsDeviceOrientation) {
+                alphaOut.innerHTML = "Your browser does not support the DeviceOrientationEvent";
+                alphaOut.style.color = "#ff0000";
+                alphaOut.style.fontWeight = "bold";
+                return;
+            }
+
+            function deviceorientationCallback (e) {
+                alphaOut.innerHTML = e.alpha;
+                betaOut.innerHTML = e.beta;
+                gammaOut.innerHTML = e.gamma;
+            }
+
+            // Listen for the event
+            root.addEventListener("deviceorientation", deviceorientationCallback, false);
+
+        };
+
+        </script>
+    </head>
+    <body>
+        <table><tbody>
+            <tr><th>Heading</th><td id="alpha-out">0</td></tr>
+            <tr><th>Pitch</th><td id="beta-out">0</td></tr>
+            <tr><th>Roll</th><td id="gamma-out">0</td></tr>
+        </tbody></table>
+    </body>
+</html>

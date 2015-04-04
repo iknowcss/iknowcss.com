@@ -1,0 +1,76 @@
+@import "speech-bubble.scss";
+
+$gradient-box-size: 50px;
+$gradient-box-color-start: #0cf;
+$gradient-box-hue-angle: 30deg;
+
+body {
+    font-family: arial, sans-serif;
+    margin: 0px;
+}
+div.experiment {
+    margin: 10px;
+}
+#navbar {
+    width: 80%;
+    height: 23px;
+    
+    ul {
+        list-style-type: none;
+        padding: 0px;
+    }
+    li {
+        float: left;
+        a {
+            font-weight: bold;
+        }
+        margin-left: 5px;
+        &:first-child { margin-left: 0px; }
+    }
+}
+
+.google {
+    border: {
+        style: solid;
+        width: 4px;
+        top:    { color: #f00; }
+        right:  { color: #0f0; }
+        bottom: { color: #ff0; }
+        left:   { color: #00f; }
+    }
+    padding: 2px 5px;
+    background-color: #ccc;
+    
+    &:hover {
+        background-color: #aaf;
+        cursor: pointer;
+    }
+}
+
+.gradient {
+    display: inline-block;
+    width: $gradient-box-size;
+    height: $gradient-box-size;
+    background-color: $gradient-box-color-start;
+}
+@for $i from 1 through 11 {
+    .g#{$i} {
+        background-color: adjust-hue($gradient-box-color-start, $gradient-box-hue-angle * $i);
+    }
+}
+
+.message-box {
+    @include speech-bubble(10px);
+    $base-color: #aaccff;
+    
+    border-color: darken($base-color,50%);
+    background-color: $base-color;
+    padding: 5px;
+    width: 300px;
+}
+.message-box button {
+    @include speech-bubble;
+    
+    border-color: black;
+    cursor: pointer;
+}
