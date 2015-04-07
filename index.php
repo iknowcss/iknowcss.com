@@ -8,13 +8,10 @@
   <body>
     
     <a href="./" id="PageHeaderAnchor">
-      <header id="PageHeader">
+      <header id="PageHeader" class="banner<? echo rand(1, 3); ?>">
         <div id="PageTitle">iknowCSS</div>
         <div id="PageTagline">Find peace with your inner &lt;<b>style</b>&gt;</div>
       </header>
-      <script>
-        document.getElementById('PageHeader').className = 'banner' + (Math.floor(Math.random() * 3) + 1);
-      </script>
     </a>
 
     <div id="PageBody">
