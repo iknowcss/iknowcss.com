@@ -3,22 +3,17 @@
   var imgSrc = 'http://www.psdgraphics.com/file/colorful-triangles-background.jpg';
 
   var mirror = document.getElementById('mirror'),
-      slider = document.getElementById('slider'),
-      y = 0;
+      slider = document.getElementById('slider');
 
-  var requested = false;
+  var prevScroll;
   function requestRender() {
-    if (requested) {
-      console.log('dump');
-      return;
-    }
-    requested = true;
-    window.requestAnimationFrame(function () {
-      slider.style.top = -window.scrollY / 10 + 'px';
-      requested = false;
-    });
-  }
+    window.requestAnimationFrame(requestRender);
 
-  window.addEventListener('scroll', requestRender);
+    if (window.pageYOffset !== prevScroll) {
+      prevScroll = window.pageYOffset;
+      slider.style.top = -prevScroll / 10 + 'px';
+    }
+  }
+  requestRender();
 
 }());
