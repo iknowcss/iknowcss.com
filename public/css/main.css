@@ -86,3 +86,23 @@ time, mark, audio, video {
 #main-home {
   background-color: #ffffff;
 }
+
+
+#skill-svg .axis path {
+  display: none;
+}
+
+#skill-svg .axis line {
+  shape-rendering: crispEdges;
+  stroke: #000;
+}
+
+#skill-svg .axis .minor line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+}
+
+#skill-svg .axis .tick text {
+  font-size: 12px;
+  /*transform: translate(1.5em, -1em);*/
+}

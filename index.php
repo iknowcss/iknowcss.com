@@ -2,7 +2,7 @@
 
 
 <div id="mirror">
-  <img src="public/img/coronado.png"/>
+  <!-- <img src="public/img/coronado.png"/> -->
 </div>
 
 <main id="main-home">
@@ -16,17 +16,52 @@ I know some other stuff, too
 
 <section class="container">
   <div class="row">
+    <div id="skill-buttons"
+        class="col-xs-12
+               col-sm-10 col-sm-push-1
+               col-lg-8 col-lg-push-2">
+
+    </div>
+  </div>
+  <div class="row">
     <div class="col-xs-12
                 col-sm-10 col-sm-push-1
                 col-lg-8 col-lg-push-2">
-      <svg id="skill-svg" style="width: 100%; height: 200px; border: 1px solid black"></svg>
+      <svg id="skill-svg" height="0" style="border: 1px solid black"></svg>
     </div>
   </div>
   <script src="public/js/skills.js"></script>
   <script src="vendor/d3/d3.js"></script>
   <script src="public/js/skill-chart.js"></script>
   <script>
-    ik.SkillChart('#skill-svg', ik.skillData);
+    (function () {
+      var chart = ik.SkillChart('#skill-svg', ik.skillData);
+
+      var groups = [
+        'Web',
+        'Server Platforms',
+        'Languages',
+        'Source control',
+        'Project management',
+        'IDEs',
+        'OS',
+        'Database',
+        'Testing'
+      ];
+
+      var skillButtons = document.getElementById('skill-buttons');
+      _.each(groups, function (groupName) {
+        var element = document.createElement('button');
+        element.innerText = groupName;
+        skillButtons.appendChild(element);
+        element.addEventListener('click', function () {
+          chart.displaySkillGroup(groupName);
+        });
+      });
+
+      chart.displaySkillGroup(groups[0])
+      // chart.displaySkillGroup('Source control');
+    }())
   </script>
 </section>
 

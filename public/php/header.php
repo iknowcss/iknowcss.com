@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="public/css/main.css">
   <script src="vendor/lodash/lodash.js"></script>
+  <script src="vendor/moment/moment.js"></script>
   <script src="public/js/namespace.js"></script>
 </head>
 <body>

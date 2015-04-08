@@ -1,6 +1,9 @@
-(function (ik) {
+(function (ik, moment) {
 
-  var PRESENT = [2015, 04]; // moment.js
+  var PRESENT = _.map(moment().toArray().slice(0, 3), function (d, i) {
+    return i === 1 ? d + 1 : d;
+  });
+
   var jobs = [
     {
       name    : 'Self employed',
@@ -361,6 +364,12 @@
       groupName: 'Testing',
       items: [
         {
+          itemName: 'Selenium',
+          periods: [
+            { from: [2009, 01], to: [2015, 04] }
+          ]
+        },
+        {
           itemName: 'Cucumber',
           periods: [
             { from: [2012, 10], to: [2015, 04] }
@@ -425,4 +434,4 @@
     PRESENT: PRESENT
   };
 
-}(window.ik));
+}(window.ik, window.moment));
