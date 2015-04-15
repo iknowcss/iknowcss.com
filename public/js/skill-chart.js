@@ -12,7 +12,7 @@
       BAR_SPACING = 5,
       GROUP_PADDING = 5,
       RESIZE_DURATION = 250,
-      BAR_EXPAND_DURATION = 750;
+      BAR_EXPAND_DURATION = 500;
 
   var COLORS = [
     [255, 0, 0, 0.5],
@@ -61,29 +61,13 @@
 
     // Init with the first skill group
     this.setSkillGroup(this.data.skills[0].groupName);
+
+    this.listenForBootstrapResize();
   }
 
+  /// - Resizing and rending functions -----------------------------------------
+
   _.extend(SkillChart.prototype, {
-
-    setSkillGroup: function (groupName) {
-      if (groupName === this.currentSkillGroup) {
-        return;
-      }
-
-      var self = this,
-          skillIndex = _.findIndex(this.data.skills, 'groupName', groupName),
-          skillGroup = this.data.skills[skillIndex];
-      this.currentSkillGroup = groupName;
-      this.currentSkillItems = skillGroup.items;
-      this.currentBarData = barDataFromItems(skillGroup.items);
-      this.resizeAndRender();
-    },
-
-    setContainerWidth: function (width) {
-      this.containerDimensions.width = width;
-      this.resizeAndRender();
-    },
-
     resizeAndRender: function (_options) {
       if (!this.currentSkillItems || !this.currentBarData) {
         return;
@@ -143,6 +127,16 @@
       this.timeAxisGroup
         .attr('transform', translate(this.timeAxisDims.x, this.timeAxisDims.y));
       this.timeAxis.scale(this.timeScale);
+
+      if (this.timeAxisDims.width < 345) {
+        this.timeAxis.tickFormat(function (d) {
+          var year = d.getYear() % 100;
+          return '\'' + (year < 10 ? '0' : '') + year;
+        });
+      } else {
+        this.timeAxis.tickFormat(undefined);
+      }
+
       this.timeAxisGroup.call(this.timeAxis);
     },
 
@@ -204,19 +198,67 @@
 
   });
 
+  /// - Other functions --------------------------------------------------------
+
+  _.extend(SkillChart.prototype, {
+
+    setSkillGroup: function (groupName) {
+      if (groupName === this.currentSkillGroup) {
+        return;
+      }
+
+      var self = this,
+          skillIndex = _.findIndex(this.data.skills, 'groupName', groupName),
+          skillGroup = this.data.skills[skillIndex];
+      this.currentSkillGroup = groupName;
+      this.currentSkillItems = skillGroup.items;
+      this.currentBarData = barDataFromItems(skillGroup.items);
+      this.resizeAndRender();
+    },
+
+    setContainerWidth: function (width) {
+      this.containerDimensions.width = width;
+      this.resizeAndRender();
+    },
+
+    listenForBootstrapResize: function () {
+      var self = this,
+          lastSnapSize,
+          throttledResizeAndRender;
+      if (!this.resizeListener) {
+        throttledResizeAndRender = _.throttle(function () {
+          self.resizeAndRender({ transition: false });
+        }, 250);
+        this.resizeListener = window.addEventListener('resize', function () {
+          var width = window.innerWidth,
+              newSnapSize = 'xs';
+          if (width >= 1200) newSnapSize = 'lg';
+          else if (width >= 992) newSnapSize = 'md';
+          else if (width >= 768) newSnapSize = 'sm';
+
+          if (newSnapSize === 'xs' || lastSnapSize !== newSnapSize) {
+            throttledResizeAndRender();
+            lastSnapSize = newSnapSize;
+          }
+        });
+      }
+    }
+
+  });
+
   /// - Util -------------------------------------------------------------------
 
   function barDataFromItems(items) {
     var data = [];
     _.each(items, function (item) {
-      _.each(_.map(item.periods, function (period) {
+      // Convert period date arrays to Date objects
+      _.each(item.periods, function (period) {
         var start = momentFromArray(period.from).toDate(),
             end = momentFromArray(period.to).toDate();
-        return { name: item.itemName, start: start, end: end };
-      }), function (d) {
-        data.push(d);
+        data.push({ name: item.itemName, start: start, end: end });
       });
     });
+
     return data.sort(function (a, b) {
       return a.start.getTime() - b.start.getTime();
     });
