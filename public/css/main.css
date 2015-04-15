@@ -87,22 +87,28 @@ time, mark, audio, video {
   background-color: #ffffff;
 }
 
-
-#skill-svg .axis path {
-  display: none;
-}
-
-#skill-svg .axis line {
+#skill-svg .t-axis line,
+#skill-svg .t-axis path {
   shape-rendering: crispEdges;
   stroke: #000;
 }
 
-#skill-svg .axis .minor line {
-  stroke: #777;
-  stroke-dasharray: 2,2;
+#skill-svg .t-axis path {
+  fill: none;
+  transform: scaleY(-1) translate(0,-6px);
 }
 
-#skill-svg .axis .tick text {
+#skill-svg .t-axis .tick text {
+  font-size: 12px;
+  /*transform: translate(1.5em, -1em);*/
+}
+
+#skill-svg .y-axis line,
+#skill-svg .y-axis path {
+  stroke: none;
+}
+
+#skill-svg .y-axis .tick text {
   font-size: 12px;
   /*transform: translate(1.5em, -1em);*/
 }

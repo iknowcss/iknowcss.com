@@ -35,7 +35,10 @@ I know some other stuff, too
   <script src="public/js/skill-chart.js"></script>
   <script>
     (function () {
-      var chart = ik.SkillChart('#skill-svg', ik.skillData);
+      var chart = ik.SkillChart({
+        container: '#skill-svg',
+        data: ik.skillData
+      });
 
       var groups = [
         'Web',
@@ -55,11 +58,11 @@ I know some other stuff, too
         element.innerText = groupName;
         skillButtons.appendChild(element);
         element.addEventListener('click', function () {
-          chart.displaySkillGroup(groupName);
+          chart.setSkillGroup(groupName);
         });
       });
 
-      chart.displaySkillGroup(groups[0])
+      chart.setSkillGroup(groups[0])
       // chart.displaySkillGroup('Source control');
     }())
   </script>
