@@ -53,10 +53,10 @@ time, mark, audio, video {
   z-index: -100;
 }
 
-#main-home { border-top: 5px solid #9900ff; }
+/*#main-home { border-top: 5px solid #9900ff; }
 @media (min-width: 768px) {  #main-home { border-top: 5px solid #00ff00; } }
 @media (min-width: 992px) {  #main-home { border-top: 5px solid #ff9900; } }
-@media (min-width: 1200px) { #main-home { border-top: 5px solid #ff0000; } }
+@media (min-width: 1200px) { #main-home { border-top: 5px solid #ff0000; } }*/
 
 
 
@@ -85,6 +85,11 @@ time, mark, audio, video {
 
 #main-home {
   background-color: #ffffff;
+}
+
+#skill-buttons .btn {
+  margin: 0.25em;
+  padding: 0.25em 0.5em;
 }
 
 #skill-svg .t-axis line,

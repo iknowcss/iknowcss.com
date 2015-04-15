@@ -23,8 +23,10 @@
   _.each(groups, function (groupName) {
     var element = document.createElement('button');
     element.innerText = groupName;
+    element.className = 'btn btn-default';
     skillButtons.appendChild(element);
     element.addEventListener('click', function () {
+      element.blur();
       chart.setSkillGroup(groupName);
     });
   });
