@@ -95,20 +95,28 @@ time, mark, audio, video {
 
 #skill-svg .t-axis path {
   fill: none;
-  transform: scaleY(-1) translate(0,-6px);
+  transform: scaleY(-1);
+}
+
+#skill-svg .t-axis line {
+  transform: translate(0, 6px);
 }
 
 #skill-svg .t-axis .tick text {
   font-size: 12px;
-  /*transform: translate(1.5em, -1em);*/
 }
 
 #skill-svg .y-axis line,
+#skill-svg .y-axis path {
+  shape-rendering: crispEdges;
+  stroke: none;
+  fill: none;
+}
+
 #skill-svg .y-axis path {
   stroke: none;
 }
 
 #skill-svg .y-axis .tick text {
   font-size: 12px;
-  /*transform: translate(1.5em, -1em);*/
 }

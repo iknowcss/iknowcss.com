@@ -7,14 +7,20 @@
 
 <main id="main-home">
 
-Cody Jenkins
 
-  iknowCSS
+<p>Cody Jenkins</p>
+
+<p>iknowCSS</p>
 
 
-I know some other stuff, too
+
+
+
 
 <section class="container">
+  <div class="row">
+    <p class="col-xs-12">Here's my professional development timeline</p>
+  </div>
   <div class="row">
     <div id="skill-buttons"
         class="col-xs-12
@@ -27,7 +33,7 @@ I know some other stuff, too
     <div class="col-xs-12
                 col-sm-10 col-sm-push-1
                 col-lg-8 col-lg-push-2">
-      <svg id="skill-svg" height="0" style="border: 1px solid black"></svg>
+      <svg id="skill-svg" height="0"></svg>
     </div>
   </div>
   <script src="public/js/skills.js"></script>
@@ -45,7 +51,7 @@ I know some other stuff, too
         'Server Platforms',
         'Languages',
         'Source control',
-        'Project management',
+        'Management tools',
         'IDEs',
         'OS',
         'Database',
@@ -62,7 +68,6 @@ I know some other stuff, too
         });
       });
 
-      chart.setSkillGroup(groups[0])
       // chart.displaySkillGroup('Source control');
     }())
   </script>

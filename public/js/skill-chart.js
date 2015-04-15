@@ -10,7 +10,9 @@
 
   var BAR_HEIGHT = 20,
       BAR_SPACING = 5,
-      GROUP_PADDING = 5;
+      GROUP_PADDING = 5,
+      RESIZE_DURATION = 250,
+      BAR_EXPAND_DURATION = 750;
 
   var COLORS = [
     [255, 0, 0, 0.5],
@@ -38,54 +40,88 @@
     this.timeScale = d3.time.scale()
       .domain([EPOCH.toDate(), now.toDate()]);
 
+    // Start with an empty scale for skills
     this.skillScale = d3.scale.ordinal().domain([]);
 
     // Axes
     this.timeAxis = d3.svg.axis()
-      .orient('bottom');
+      .orient('top');
     this.skillAxis = d3.svg.axis()
       .orient('left')
       .outerTickSize(0)
       .scale(this.skillScale);
 
-    // Init
-    this.setContainerDimensions({ width: 600, height: 400 });
+    // Dimensions
+    this.containerDimensions = { width: 600, height: 0 };
+
+    // Init with the first skill group
+    this.setSkillGroup(this.data.skills[0].groupName);
   }
 
   _.extend(SkillChart.prototype, {
 
-    setContainerDimensions: function (dimensions) {
-      var SKILL_AXIS_WIDTH = 150,
+    setSkillGroup: function (groupName) {
+      if (groupName === this.currentSkillGroup) {
+        return;
+      }
+
+      var self = this,
+          skillIndex = _.findIndex(this.data.skills, 'groupName', groupName),
+          skillGroup = this.data.skills[skillIndex];
+      this.currentSkillGroup = groupName;
+      this.currentSkillItems = skillGroup.items;
+      this.currentBarData = barDataFromItems(skillGroup.items);
+      this.resizeAndRender();
+    },
+
+    setContainerWidth: function (width) {
+      this.containerDimensions.width = width;
+      this.resizeAndRender();
+    },
+
+    resizeAndRender: function () {
+      if (!this.currentSkillItems || !this.currentBarData) {
+        return;
+      }
+
+      var groupItemCount = this.currentSkillItems.length;
+
+      var SKILL_AXIS_WIDTH = 100,
           TIME_AXIS_HEIGHT = 30;
 
-      // Set the root container dimensions
-      this.containerDimensions = dimensions;
-      this.svg
-        .attr('width', this.containerDimensions.width)
-        .attr('height', this.containerDimensions.height);
+      this.svg.attr('width', this.containerDimensions.width);
 
       // Calculate the group dimensions
-      this.skillAxisDims = {
-        x       : GROUP_PADDING,
-        y       : GROUP_PADDING,
-        width   : SKILL_AXIS_WIDTH,
-        height  : this.containerDimensions.height - TIME_AXIS_HEIGHT - GROUP_PADDING * 3
-      };
-      this.timeAxisDims = {
-        x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
-        y       : this.containerDimensions.height - TIME_AXIS_HEIGHT - GROUP_PADDING,
-        width   : this.containerDimensions.width - SKILL_AXIS_WIDTH - GROUP_PADDING * 3,
-        height  : TIME_AXIS_HEIGHT
-      };
       this.skillBarDims = {
         x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
-        y       : GROUP_PADDING,
-        width   : this.timeAxisDims.width,
-        height  : this.skillAxisDims.height
+        y       : TIME_AXIS_HEIGHT + GROUP_PADDING * 2,
+        width   : this.containerDimensions.width - SKILL_AXIS_WIDTH - GROUP_PADDING * 3,
+        height  : groupItemCount * BAR_HEIGHT + (groupItemCount - 1) * BAR_SPACING
       };
+
+      this.skillAxisDims = {
+        x       : GROUP_PADDING,
+        y       : TIME_AXIS_HEIGHT + GROUP_PADDING * 2 + BAR_HEIGHT / 2,
+        width   : SKILL_AXIS_WIDTH,
+        height  : this.skillBarDims.height - BAR_HEIGHT
+      };
+
+      this.timeAxisDims = {
+        x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
+        y       : GROUP_PADDING + TIME_AXIS_HEIGHT - GROUP_PADDING,
+        width   : this.skillBarDims.width,
+        height  : TIME_AXIS_HEIGHT
+      };
+
+      this.containerDimensions.height = this.skillBarDims.height + this.timeAxisDims.height + GROUP_PADDING * 3;
+
+      this.svg.transition()
+        .duration(RESIZE_DURATION)
+        .attr('height', this.containerDimensions.height)
 
       // Set the time scale based on the new time axis dimensions
       this.timeScale.range([0, this.timeAxisDims.width]);
+      this.skillScale.domain(_.pluck(this.currentBarData, 'name'));
 
       // Re-render
       this.render();
@@ -109,28 +145,19 @@
         .attr('transform', translate(this.skillAxisDims.x + this.skillAxisDims.width, this.skillAxisDims.y));
       this.skillScale
         .rangePoints([0, this.skillAxisDims.height]);
-      this.skillAxisGroup.call(this.skillAxis);
+      this.skillAxisGroup
+        .transition()
+        .call(this.skillAxis);
     },
 
     renderGroupBars: function () {
       this.skillBarGroup
         .attr('transform', translate(this.skillBarDims.x, this.skillBarDims.y));
-    },
 
-    setSkillGroup: function (groupName) {
       var self = this,
-          skillIndex = _.findIndex(this.data.skills, 'groupName', groupName),
-          skillGroup = this.data.skills[skillIndex]/*,
-          data = barDataFromItems(skillGroup.items),
-          skillBars = this.skillBars.selectAll('rect').data(data)*/;
-
-      this.skillScale.domain(_.pluck(skillGroup.items, 'itemName'));
-
-      this.render();
-
-      return;
-
-      var barYMap = {},
+          data = this.currentBarData,
+          skillBars = this.skillBarGroup.selectAll('rect').data(data),
+          barYMap = {},
           barColorMap = {},
           i = 0;
 
@@ -140,34 +167,23 @@
 
       skillBars
           .attr('x', function (d) {
-            return self.monthScale(d.start);
+            return self.timeScale(d.start);
           })
           .attr('y', function (d) {
-            return (self.barHeight + self.barSpacing) * (barYMap.hasOwnProperty(d.name) ?
+            return (BAR_HEIGHT + BAR_SPACING) * (barYMap.hasOwnProperty(d.name) ?
               barYMap[d.name] : (barYMap[d.name] = i++));
           })
-          .attr('width', 0)
-          .attr('height', this.barHeight)
+          .attr('height', BAR_HEIGHT)
           .attr('fill', function (d) {
             return barColorMap.hasOwnProperty(d.name) ?
               barColorMap[d.name] : (barColorMap[d.name] = rgba(COLORS[barYMap[d.name] % COLORS.length]))
           })
-        .call(function () {
-          var chartHeight = i * (self.barHeight + self.barSpacing) - self.barSpacing;
-
-          self.svg
-            .transition()
-            .attr('height', chartHeight + self.chartPadding * 2 + 25);
-
-          var xAxisY = chartHeight + self.chartPadding * 2;
-          self.xAxis
-            .transition()
-            .attr('transform', 'translate(' + self.chartPadding + ',' + xAxisY + ')');
-        })
+          .attr('width', 0)
         .transition()
-          .duration(750)
+          .duration(BAR_EXPAND_DURATION)
+
           .attr('width', function (d) {
-            return self.monthScale(d.end) - self.monthScale(d.start);
+            return self.timeScale(d.end) - self.timeScale(d.start);
           });
 
       // this.svg

@@ -68,6 +68,12 @@
           ]
         },
         {
+          itemName: 'JavaScript',
+          periods: [
+            { from: [2005, 01], to: PRESENT }
+          ]
+        },
+        {
           itemName: 'CSS',
           periods: [
             { from: [2005, 01], to: PRESENT }
@@ -102,6 +108,19 @@
           periods: [
             { from: [2012, 10], to: [2015, 04] }
           ]
+        },
+        {
+          itemName: 'ASP.NET',
+          periods: [
+            { from: [2007, 06], to: [2012, 01] }
+          ]
+        },
+
+        {
+          itemName: 'PHP',
+          periods: [
+            { from: [2005, 01], to: [2007, 06] }
+          ]
         }
       ]
     },
@@ -109,12 +128,6 @@
     {
       groupName: 'Server Platforms',
       items: [
-        {
-          itemName: 'ASP.NET',
-          periods: [
-            { from: [2007, 06], to: [2012, 01] }
-          ]
-        },
         {
           itemName: 'Apache',
           periods: [
@@ -135,6 +148,12 @@
         },
         {
           itemName: 'JBoss',
+          periods: [
+            { from: [2012, 10], to: [2015, 04] }
+          ]
+        },
+        {
+          itemName: 'Jetty',
           periods: [
             { from: [2012, 10], to: [2015, 04] }
           ]
@@ -167,7 +186,7 @@
         {
           itemName: 'PHP',
           periods: [
-            { from: [2005, 01], to: [2006, 01] }
+            { from: [2005, 01], to: [2007, 06] }
           ]
         }
       ]
@@ -205,7 +224,7 @@
     },
 
     {
-      groupName: 'Project management',
+      groupName: 'Management tools',
       items: [
         {
           itemName: 'Bugzilla',
@@ -239,18 +258,6 @@
         },
         {
           itemName: 'Confluence',
-          periods: [
-            { from: [2012, 10], to: [2015, 04] }
-          ]
-        },
-        {
-          itemName: 'Scrum',
-          periods: [
-            { from: [2012, 10], to: [2015, 04] }
-          ]
-        },
-        {
-          itemName: 'Agile',
           periods: [
             { from: [2012, 10], to: [2015, 04] }
           ]
