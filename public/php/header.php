@@ -10,6 +10,7 @@
   <script src="vendor/lodash/lodash.js"></script>
   <script src="vendor/moment/moment.js"></script>
   <script src="public/js/namespace.js"></script>
+  <script src="public/js/util.js"></script>
 </head>
 <body>
 <header>

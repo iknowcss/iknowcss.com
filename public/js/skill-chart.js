@@ -22,15 +22,20 @@
 
   /// - Constructor ------------------------------------------------------------
 
+  var DEFAULTS = {};
+
   function SkillChart(options) {
     if (!(this instanceof SkillChart)) {
       return new SkillChart(options);
     }
 
-    this.data = options.data;
+    this.options = _.extend({}, DEFAULTS, options);
+    this.data = this.options.data;
+
+    this.container = document.querySelector(this.options.container);
 
     // Init SVG groups
-    this.svg = d3.select(options.container);
+    this.svg = d3.select(this.options.container);
     this.skillBarGroup = this.svg.append('g');
     this.skillAxisGroup = this.svg.append('g').attr('class', 'y-axis');
     this.timeAxisGroup = this.svg.append('g').attr('class', 't-axis');
@@ -52,7 +57,7 @@
       .scale(this.skillScale);
 
     // Dimensions
-    this.containerDimensions = { width: 600, height: 0 };
+    this.containerDimensions = { width : 0, height : 0 };
 
     // Init with the first skill group
     this.setSkillGroup(this.data.skills[0].groupName);
@@ -79,7 +84,7 @@
       this.resizeAndRender();
     },
 
-    resizeAndRender: function () {
+    resizeAndRender: function (_options) {
       if (!this.currentSkillItems || !this.currentBarData) {
         return;
       }
@@ -89,7 +94,8 @@
       var SKILL_AXIS_WIDTH = 100,
           TIME_AXIS_HEIGHT = 30;
 
-      this.svg.attr('width', this.containerDimensions.width);
+      // Get the current SVG area width
+      this.containerDimensions.width = this.container.clientWidth;
 
       // Calculate the group dimensions
       this.skillBarDims = {
@@ -124,37 +130,42 @@
       this.skillScale.domain(_.pluck(this.currentBarData, 'name'));
 
       // Re-render
-      this.render();
+      this.render(_options);
     },
 
-    render: function () {
-      this.renderTimeAxis();
-      this.renderSkillAxis();
-      this.renderGroupBars();
+    render: function (_options) {
+      this.renderTimeAxis(_options);
+      this.renderSkillAxis(_options);
+      this.renderGroupBars(_options);
     },
 
-    renderTimeAxis: function () {
+    renderTimeAxis: function (_options) {
       this.timeAxisGroup
         .attr('transform', translate(this.timeAxisDims.x, this.timeAxisDims.y));
       this.timeAxis.scale(this.timeScale);
       this.timeAxisGroup.call(this.timeAxis);
     },
 
-    renderSkillAxis: function () {
+    renderSkillAxis: function (_options) {
       this.skillAxisGroup
         .attr('transform', translate(this.skillAxisDims.x + this.skillAxisDims.width, this.skillAxisDims.y));
       this.skillScale
         .rangePoints([0, this.skillAxisDims.height]);
-      this.skillAxisGroup
-        .transition()
-        .call(this.skillAxis);
+
+      var options = _.extend({}, _options),
+          chain = this.skillAxisGroup;
+      if (options.transition !== false) {
+        chain = chain.transition();
+      }
+      chain.call(this.skillAxis);
     },
 
-    renderGroupBars: function () {
+    renderGroupBars: function (_options) {
       this.skillBarGroup
         .attr('transform', translate(this.skillBarDims.x, this.skillBarDims.y));
 
       var self = this,
+          options = _.extend({}, _options),
           data = this.currentBarData,
           skillBars = this.skillBarGroup.selectAll('rect').data(data),
           barYMap = {},
@@ -165,29 +176,30 @@
 
       skillBars.enter().append('rect');
 
-      skillBars
-          .attr('x', function (d) {
-            return self.timeScale(d.start);
-          })
-          .attr('y', function (d) {
-            return (BAR_HEIGHT + BAR_SPACING) * (barYMap.hasOwnProperty(d.name) ?
-              barYMap[d.name] : (barYMap[d.name] = i++));
-          })
-          .attr('height', BAR_HEIGHT)
-          .attr('fill', function (d) {
-            return barColorMap.hasOwnProperty(d.name) ?
-              barColorMap[d.name] : (barColorMap[d.name] = rgba(COLORS[barYMap[d.name] % COLORS.length]))
-          })
-          .attr('width', 0)
-        .transition()
-          .duration(BAR_EXPAND_DURATION)
+      var chain = skillBars
+        .attr('x', function (d) {
+          return self.timeScale(d.start);
+        })
+        .attr('y', function (d) {
+          return (BAR_HEIGHT + BAR_SPACING) * (barYMap.hasOwnProperty(d.name) ?
+            barYMap[d.name] : (barYMap[d.name] = i++));
+        })
+        .attr('height', BAR_HEIGHT)
+        .attr('fill', function (d) {
+          return barColorMap.hasOwnProperty(d.name) ?
+            barColorMap[d.name] : (barColorMap[d.name] = rgba(COLORS[barYMap[d.name] % COLORS.length]))
+        })
+        .attr('width', 0);
 
-          .attr('width', function (d) {
-            return self.timeScale(d.end) - self.timeScale(d.start);
-          });
+      if (options.transition !== false) {
+        chain = chain.transition()
+          .duration(BAR_EXPAND_DURATION);
+      }
 
-      // this.svg
-      //   .attr('height', (self.barHeight + self.barSpacing))
+      chain
+        .attr('width', function (d) {
+          return self.timeScale(d.end) - self.timeScale(d.start);
+        });
     }
 
   });
