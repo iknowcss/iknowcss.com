@@ -100,7 +100,7 @@
       };
 
       this.timeAxisDims = {
-        x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
+        x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 3, // Add extra group padding so that left-aligned years have some room
         y       : GROUP_PADDING + TIME_AXIS_HEIGHT - GROUP_PADDING,
         width   : this.skillBarDims.width,
         height  : TIME_AXIS_HEIGHT

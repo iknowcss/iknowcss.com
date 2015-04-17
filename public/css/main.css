@@ -116,7 +116,6 @@ time, mark, audio, video {
 #skill-svg .t-axis .tick text {
   font-size: 12px;
   text-anchor: start !important;
-  transform: translate(0.4em, 0);
 }
 
 #skill-svg .y-axis line,
