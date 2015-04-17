@@ -100,7 +100,7 @@
       };
 
       this.timeAxisDims = {
-        x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 3, // Add extra group padding so that left-aligned years have some room
+        x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
         y       : GROUP_PADDING + TIME_AXIS_HEIGHT - GROUP_PADDING,
         width   : this.skillBarDims.width,
         height  : TIME_AXIS_HEIGHT
@@ -161,13 +161,16 @@
     },
 
     renderTimeAxis: function (_options) {
+      var tiny = this.timeAxisDims.width < 345,
+          x = this.timeAxisDims.x + (tiny ? GROUP_PADDING / 2 : GROUP_PADDING);
+
       // Position and scale the time axis
       this.timeAxisGroup
-        .attr('transform', translate(this.timeAxisDims.x, this.timeAxisDims.y));
+        .attr('transform', translate(x, this.timeAxisDims.y));
       this.timeAxis.scale(this.timeScale);
 
       // If the time axis is not wide enough, display years with 2 digits
-      if (this.timeAxisDims.width < 345) {
+      if (tiny) {
         this.timeAxis.tickFormat(function (d) {
           var year = d.getYear() % 100;
           return '\'' + (year < 10 ? '0' : '') + year;
