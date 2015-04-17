@@ -6,8 +6,8 @@
   });
 
   var groups = [
-    'Web',
-    'Server Platforms',
+    'Front end',
+    'Server',
     'Languages',
     'Source control',
     'Management tools',

@@ -11,8 +11,11 @@
   var BAR_HEIGHT = 20,
       BAR_SPACING = 5,
       GROUP_PADDING = 5,
+      CANVAS_RIGHT_MARGIN = 20,
       RESIZE_DURATION = 250,
-      BAR_EXPAND_DURATION = 500;
+      BAR_EXPAND_DURATION = 500,
+      SKILL_AXIS_WIDTH = 90,
+      TIME_AXIS_HEIGHT = 30;
 
   var COLORS = [
     // [255, 0, 0, 0.5],
@@ -37,14 +40,15 @@
 
     // Init SVG groups
     this.svg = d3.select(this.options.container);
+    this.zebraGroup = this.svg.append('g');
     this.skillBarGroup = this.svg.append('g');
     this.skillAxisGroup = this.svg.append('g').attr('class', 'y-axis');
     this.timeAxisGroup = this.svg.append('g').attr('class', 't-axis');
 
     // Scale the number of months since the epoch to a percentage of total time
-    var now = momentFromArray(this.data.PRESENT);
+    this.now = momentFromArray(this.data.PRESENT);
     this.timeScale = d3.time.scale()
-      .domain([EPOCH.toDate(), now.toDate()]);
+      .domain([EPOCH.toDate(), this.now.toDate()]);
 
     // Start with an empty scale for skills
     this.skillScale = d3.scale.ordinal().domain([]);
@@ -69,15 +73,13 @@
   /// - Resizing and rending functions -----------------------------------------
 
   _.extend(SkillChart.prototype, {
+
     resizeAndRender: function (_options) {
       if (!this.currentSkillItems || !this.currentBarData) {
         return;
       }
 
       var groupItemCount = this.currentSkillItems.length;
-
-      var SKILL_AXIS_WIDTH = 100,
-          TIME_AXIS_HEIGHT = 30;
 
       // Get the current SVG area width
       this.containerDimensions.width = this.container.clientWidth;
@@ -86,7 +88,7 @@
       this.skillBarDims = {
         x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
         y       : TIME_AXIS_HEIGHT + GROUP_PADDING * 2,
-        width   : this.containerDimensions.width - SKILL_AXIS_WIDTH - GROUP_PADDING * 3,
+        width   : this.containerDimensions.width - SKILL_AXIS_WIDTH - GROUP_PADDING * 3 - CANVAS_RIGHT_MARGIN,
         height  : groupItemCount * BAR_HEIGHT + (groupItemCount - 1) * BAR_SPACING
       };
 
@@ -102,6 +104,13 @@
         y       : GROUP_PADDING + TIME_AXIS_HEIGHT - GROUP_PADDING,
         width   : this.skillBarDims.width,
         height  : TIME_AXIS_HEIGHT
+      };
+
+      this.zebraDims = {
+        x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
+        y       : GROUP_PADDING,
+        width   : this.skillBarDims.width,
+        height  : TIME_AXIS_HEIGHT + this.skillBarDims.height + 2 * GROUP_PADDING
       };
 
       this.containerDimensions.height = this.skillBarDims.height + this.timeAxisDims.height + GROUP_PADDING * 3;
@@ -120,15 +129,44 @@
 
     render: function (_options) {
       this.renderTimeAxis(_options);
+      this.renderZebra(_options);
       this.renderSkillAxis(_options);
       this.renderGroupBars(_options);
     },
 
+    renderZebra: function (_options) {
+      var self = this;
+
+      // Move the zebra bars
+      this.zebraGroup
+        .attr('transform', translate(this.zebraDims.x, this.zebraDims.y));
+
+      var ticks = this.timeScale.ticks();
+      var data = _.map(ticks, function (tick) {
+        return self.timeScale(tick);
+      });
+
+      var width = data[1] - data[0],
+          zebraBars = this.zebraGroup.selectAll('rect').data(data);
+
+      zebraBars.enter().append('rect');
+
+      zebraBars
+          .attr('x', function (d) { return d; })
+          .attr('y', 0)
+          .attr('width', width)
+          .attr('class', function (d, i) { return 'zebra-' + (i % 2 ? 'odd' : 'even'); })
+        .transition()
+          .attr('height', this.zebraDims.height);
+    },
+
     renderTimeAxis: function (_options) {
+      // Position and scale the time axis
       this.timeAxisGroup
         .attr('transform', translate(this.timeAxisDims.x, this.timeAxisDims.y));
       this.timeAxis.scale(this.timeScale);
 
+      // If the time axis is not wide enough, display years with 2 digits
       if (this.timeAxisDims.width < 345) {
         this.timeAxis.tickFormat(function (d) {
           var year = d.getYear() % 100;
@@ -138,6 +176,7 @@
         this.timeAxis.tickFormat(undefined);
       }
 
+      // Apply the time axis
       this.timeAxisGroup.call(this.timeAxis);
     },
 

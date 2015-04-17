@@ -87,6 +87,10 @@ time, mark, audio, video {
   background-color: #ffffff;
 }
 
+#main-home > section {
+  margin-bottom: 10em;
+}
+
 #skill-buttons .btn {
   margin: 0.25em;
   padding: 0.25em 0.5em;
@@ -100,15 +104,19 @@ time, mark, audio, video {
 
 #skill-svg .t-axis path {
   fill: none;
+  stroke: none;
   transform: scaleY(-1);
 }
 
 #skill-svg .t-axis line {
+  stroke: none;
   transform: translate(0, 6px);
 }
 
 #skill-svg .t-axis .tick text {
   font-size: 12px;
+  text-anchor: start !important;
+  transform: translate(0.4em, 0);
 }
 
 #skill-svg .y-axis line,
@@ -124,4 +132,12 @@ time, mark, audio, video {
 
 #skill-svg .y-axis .tick text {
   font-size: 12px;
+}
+
+#skill-svg .zebra-even {
+  fill: #ebebeb;
+}
+
+#skill-svg .zebra-odd {
+  fill: #ffffff;
 }

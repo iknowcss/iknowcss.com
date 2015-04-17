@@ -59,7 +59,7 @@
 
   var skills = [
     {
-      groupName: 'Web',
+      groupName: 'Front end',
       items: [
         {
           itemName: 'AJAX',
@@ -126,7 +126,7 @@
     },
 
     {
-      groupName: 'Server Platforms',
+      groupName: 'Server',
       items: [
         {
           itemName: 'Apache',
