@@ -87,14 +87,14 @@
       // Calculate the group dimensions
       this.skillBarDims = {
         x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
-        y       : TIME_AXIS_HEIGHT + GROUP_PADDING * 2,
+        y       : TIME_AXIS_HEIGHT + GROUP_PADDING,
         width   : this.containerDimensions.width - SKILL_AXIS_WIDTH - GROUP_PADDING * 3 - CANVAS_RIGHT_MARGIN,
         height  : groupItemCount * BAR_HEIGHT + (groupItemCount - 1) * BAR_SPACING
       };
 
       this.skillAxisDims = {
         x       : GROUP_PADDING,
-        y       : TIME_AXIS_HEIGHT + GROUP_PADDING * 2 + BAR_HEIGHT / 2,
+        y       : TIME_AXIS_HEIGHT + GROUP_PADDING + BAR_HEIGHT / 2,
         width   : SKILL_AXIS_WIDTH,
         height  : this.skillBarDims.height - BAR_HEIGHT
       };
@@ -110,7 +110,7 @@
         x       : SKILL_AXIS_WIDTH + GROUP_PADDING * 2,
         y       : GROUP_PADDING,
         width   : this.skillBarDims.width,
-        height  : TIME_AXIS_HEIGHT + this.skillBarDims.height + 2 * GROUP_PADDING
+        height  : TIME_AXIS_HEIGHT + this.skillBarDims.height + GROUP_PADDING
       };
 
       this.containerDimensions.height = this.skillBarDims.height + this.timeAxisDims.height + GROUP_PADDING * 3;
@@ -161,7 +161,8 @@
     },
 
     renderTimeAxis: function (_options) {
-      var tiny = this.timeAxisDims.width < 345,
+      var small = this.timeAxisDims.width < 350,
+          tiny = this.timeAxisDims.width < 225,
           x = this.timeAxisDims.x + (tiny ? GROUP_PADDING / 2 : GROUP_PADDING);
 
       // Position and scale the time axis
@@ -170,8 +171,11 @@
       this.timeAxis.scale(this.timeScale);
 
       // If the time axis is not wide enough, display years with 2 digits
-      if (tiny) {
-        this.timeAxis.tickFormat(function (d) {
+      if (small) {
+        this.timeAxis.tickFormat(function (d, i) {
+          if (tiny && i % 2 === 1) {
+            return '';  
+          }
           var year = d.getYear() % 100;
           return '\'' + (year < 10 ? '0' : '') + year;
         });
