@@ -62,7 +62,7 @@
 
 <!-- Skills chart -->
 
-<section class="container">
+<section class="container" data-bind="controller: 'skill-chart'">
   <div class="row">
     <p class="col-xs-12">
       I've worked with a lot of technology over the years. Here's a brief
@@ -70,24 +70,30 @@
     </p>
   </div>
   <div class="row">
-    <div id="skill-buttons"
+    <nav 
         class="col-xs-12
-               col-sm-10 col-sm-push-1
-               col-lg-8 col-lg-push-2">
-
-    </div>
+               col-sm-10 col-sm-push-1">
+      <ul id="skill-tabs"
+          class="nav nav-tabs nav-justified"
+          data-bind="foreach: groups">
+        <li data-bind="css: $data === $parent.activeGroup() ? 'active' : ''">
+          <a href="#"
+              data-bind="text  : $data,
+                         click : $parent.selectGroup"></a>
+        </li>
+      </ul>
+    </nav>
   </div>
   <div class="row">
     <div class="col-xs-12
-                col-sm-10 col-sm-push-1
-                col-lg-8 col-lg-push-2">
+                col-sm-10 col-sm-push-1">
       <svg id="skill-svg" height="0" width="100%"></svg>
     </div>
   </div>
   <script src="public/js/skills.js"></script>
   <script src="vendor/d3/d3.js"></script>
   <script src="public/js/skill-chart.js"></script>
-  <script src="public/js/page/index.js"></script>
+  <script src="public/js/controller/skill-chart.js"></script>
 </section>
 
 <!-- Whitespace -->

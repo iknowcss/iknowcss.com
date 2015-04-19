@@ -36,10 +36,10 @@
     this.options = _.extend({}, DEFAULTS, options);
     this.data = this.options.data;
 
-    this.container = document.querySelector(this.options.container);
+    this.container = this.options.svg;
 
     // Init SVG groups
-    this.svg = d3.select(this.options.container);
+    this.svg = d3.select(this.container);
     this.zebraGroup = this.svg.append('g');
     this.skillBarGroup = this.svg.append('g');
     this.skillAxisGroup = this.svg.append('g').attr('class', 'y-axis');
@@ -64,9 +64,7 @@
     // Dimensions
     this.containerDimensions = { width : 0, height : 0 };
 
-    // Init with the first skill group
-    this.setSkillGroup(this.data.skills[0].groupName);
-
+    // Hey, listen!
     this.listenForBootstrapResize();
   }
 

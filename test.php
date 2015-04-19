@@ -7,15 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" type="text/css" href="public/css/main.css">
-  <script src="vendor/lodash/lodash.js"></script>
-  <script src="vendor/moment/moment.js"></script>
-  <script src="vendor/jquery/jquery.js"></script>
-  <script src="vendor/knockout/knockout.js"></script>
-  <script src="public/js/namespace.js"></script>
-  <script src="public/js/binding/controller.js"></script>
 </head>
 <body>
 <header>
 </header>
 <main>
+
+
+<div class="container">
+<div class="row">
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">Alpha</a></li>
+  <li><a href="#">Beta</a></li>
+</ul>
+
+</div>
+</div>
+
+<? include('./public/php/footer.php'); ?>

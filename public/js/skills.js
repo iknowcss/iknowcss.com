@@ -59,7 +59,7 @@
 
   var skills = [
     {
-      groupName: 'Front end',
+      groupName: 'UI',
       items: [
         {
           itemName: 'AJAX',
@@ -193,7 +193,7 @@
     },
 
     {
-      groupName: 'Source control',
+      groupName: 'SCM',
       items: [
         {
           itemName: 'SVN',
@@ -224,7 +224,7 @@
     },
 
     {
-      groupName: 'Management tools',
+      groupName: 'Tools',
       items: [
         {
           itemName: 'Bugzilla',
