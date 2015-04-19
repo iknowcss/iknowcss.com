@@ -8,8 +8,11 @@
         scroll = window.pageYOffset;
 
     function applyParallax() {
-      slider.css('top', -window.pageYOffset / 2 + 'px');
-      title.css('top', window.pageYOffset / 3 + 'px');
+      var offset = window.pageYOffset,
+          sliderOffset = (offset < 0 ? -offset : -offset / 2),
+          titleOffset = (offset < 0 ? -offset : -offset / (1.5));
+      slider.css('top', sliderOffset + 'px');
+      title.css('top', titleOffset + 'px');
     }
 
     $(window).on(isMousewheelAvailable() ? 'mousewheel' : 'scroll', applyParallax);

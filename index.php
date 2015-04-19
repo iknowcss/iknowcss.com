@@ -17,14 +17,14 @@
   <section class="container">
     <div class="row">
       <p class="col-xs-12 text-center">
-        I love to write code. You have a great idea.<br>
-        Let's build something together
+        <!-- I love to write code. You have a great idea.<br>
+        Let's build something together -->
       </p>
     </div>
     <div class="row">
       <p class="col-xs-12">
-        I have 10 years of experience developing quality web applications for
-        businesses and individuals.
+        <!-- I have 10 years of experience developing quality web applications for
+        businesses and individuals. -->
       </p>
 
         <!--
