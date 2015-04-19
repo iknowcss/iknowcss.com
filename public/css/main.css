@@ -42,43 +42,54 @@ time, mark, audio, video {
   font-family: Alike;
 }
 
-/* Home Page */
-#mirror {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  z-index: -100;
-}
-
 /*#main-home { border-top: 5px solid #9900ff; }
 @media (min-width: 768px) {  #main-home { border-top: 5px solid #00ff00; } }
 @media (min-width: 992px) {  #main-home { border-top: 5px solid #ff9900; } }
 @media (min-width: 1200px) { #main-home { border-top: 5px solid #ff0000; } }*/
 
+/* - Parallax --------------------------------------------------------------- */
 
 
-#main-home { margin-top: 200px; }
-/*#mirror img { top: -60px; }*/
+#parallax-mirror {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  z-index: -100;
+  text-align: center;
+}
 
-#mirror img {
+#parallax-mirror .slider {
   width: 100%;
   position: absolute;
+  left: 0;
 }
+
+#parallax-mirror .title {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  color: white;
+}
+
+#parallax-mirror .title                             { font-size: 2em; }
+@media (min-width: 500px) { #parallax-mirror .title { font-size: 3em; } }
+@media (min-width: 768px) { #parallax-mirror .title { font-size: 5em; } }
+@media (min-width: 992px) { #parallax-mirror .title { font-size: 7em; } }
+
+/* - Main ------------------------------------------------------------------- */
 
 #main-home {
   background-color: #ffffff;
 }
 
-#main-header {
-  background-color: rgba(255, 255, 255, 0.8);
+#main-home > section {
+  /*margin-bottom: 10em;*/
 }
 
-#main-home > section {
-  margin-bottom: 10em;
-}
+/* - Skill ------------------------------------------------------------------ */
 
 #skill-tabs li {
   vertical-align: bottom;

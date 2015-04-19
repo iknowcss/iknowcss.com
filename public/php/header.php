@@ -12,10 +12,10 @@
   <script src="vendor/moment/moment.js"></script>
   <script src="vendor/jquery/jquery.js"></script>
   <script src="vendor/knockout/knockout.js"></script>
+  <script src="vendor/knockout-postbox/knockout-postbox.js"></script>
   <script src="public/js/namespace.js"></script>
   <script src="public/js/binding/controller.js"></script>
 </head>
 <body>
 <header>
 </header>
-<main>
