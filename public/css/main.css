@@ -61,22 +61,7 @@ time, mark, audio, video {
 
 
 #main-home { margin-top: 200px; }
-#mirror img { top: 0px; }
-
-@media (min-width: 768px) {
-  #main-home { margin-top: 300px; }
-  #mirror img { top: -150px; }
-}
-
-@media (min-width: 992px) {
-  #main-home { margin-top: 400px; }
-  #mirror img { top: -225px; }
-}
-
-@media (min-width: 1200px) {
-  #main-home { margin-top: 400px; }
-  #mirror img { top: -350px; }
-}
+/*#mirror img { top: -60px; }*/
 
 #mirror img {
   width: 100%;
@@ -85,6 +70,10 @@ time, mark, audio, video {
 
 #main-home {
   background-color: #ffffff;
+}
+
+#main-header {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 #main-home > section {

@@ -4,17 +4,19 @@
 
 <div id="mirror">
   <!-- <img src="public/img/coronado.png"/> -->
+  <!-- <img src="public/img/sydney.png"/> -->
 </div>
+
+<header id="main-header" class="jumbotron text-center">
+  <h1>Cody Jenkins</h1>
+  <p>I love to write code. You have a great idea.</p>
+  <p>Let's build something together</p>
+</header>
 
 <!-- Main -->
 
 <main id="main-home">
 
-<header class="jumbotron text-center">
-  <h1>Cody Jenkins</h1>
-  <p>I love to play with code. You have great ideas.</p>
-  <p>Let's build something together</p>
-</header>
 
 <!-- Portfolio overview -->
 
@@ -69,10 +71,9 @@
       overview of my experience.
     </p>
   </div>
+
   <div class="row">
-    <nav 
-        class="col-xs-12
-               col-sm-10 col-sm-push-1">
+    <nav class="col-md-10 col-md-push-1">
       <ul id="skill-tabs"
           class="nav nav-tabs nav-justified"
           data-bind="foreach: groups">
