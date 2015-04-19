@@ -12,7 +12,7 @@
       title.css('top', window.pageYOffset / 3 + 'px');
     }
 
-    $(window).on('mousewheel', applyParallax);
+    $(window).on(isMousewheelAvailable() ? 'mousewheel' : 'scroll', applyParallax);
     $(applyParallax);
 
     function publishSliderHeight() {
@@ -23,5 +23,9 @@
     publishSliderHeight();
 
   });
+
+  function isMousewheelAvailable() {
+    return !/(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+  }
 
 }(window.ik, window.ko, window.jQuery));
