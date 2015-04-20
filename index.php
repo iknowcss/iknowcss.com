@@ -3,7 +3,10 @@
 <? include('./public/php/header.php'); ?>
 
   <script src="public/js/controller/parallax-header.js"></script>
-  <div id="parallax-mirror" data-bind="controller: 'parallax-header'">
+  <div id="parallax-mirror"
+      data-bind="controller: 'parallax-header',
+                 controllerParams: { imgHeight: 1841, imgWidth: 5248 }">
+    <img class="slider" src="public/img/sydney-xs.jpg"/>
     <img class="slider" data-bind="attr: { src: sliderSrc }"/>
     <h1 class="title">Cody Jenkins</h1>
   </div>
@@ -11,7 +14,8 @@
   <!-- Nav -->
 
   <script src="public/js/controller/main-nav.js"></script>
-  <nav id="main-nav" data-bind="controller: 'main-nav'">
+  <nav id="main-nav"
+      data-bind="controller: 'main-nav'">
     <div class="container"><div class="row">
       <div class="col-xs-12">
         <ul>

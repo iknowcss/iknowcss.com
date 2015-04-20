@@ -1,9 +1,11 @@
 (function (ik, ko, $) {
 
-  ik.controller.register('parallax-header', function (element) {
+  ik.controller.register('parallax-header', function (element, paramsAccessor) {
 
-    var $body = $('body'),
+    var $window = $(window),
+        $body = $('body'),
         $element = $(element),
+        params = ko.unwrap(paramsAccessor),
         slider = $element.find('.slider'),
         title = $element.find('.title');
 
@@ -16,19 +18,21 @@
     }
 
     ik.util.pageYOffset.subscribe(applyParallax);
-    slider.on('load', applyParallax);
+    $(applyParallax);
 
     function repositionBodyForSlider() {
-      var height = slider.height();
+      var height = $window.width() * params.imgHeight / params.imgWidth,
+          fontSize = height * 0.25;
       $body.css('margin-top', height);
+      title.css('font-size', fontSize + 'px')
       ko.postbox.publish('parallax-slider-height', height);
     }
 
     $(window).on('resize', repositionBodyForSlider);
-    slider.on('load', repositionBodyForSlider);
+    $(repositionBodyForSlider);
 
     return {
-      sliderSrc: 'public/img/sydney-xs.jpg'
+      sliderSrc: 'public/img/sydney-full.jpg'
     };
   });
 
