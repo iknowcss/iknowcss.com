@@ -3,11 +3,9 @@
   var isMousewheelAvailable = !/(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 
   ik.util.pageYOffset = ko.observable(0);
-  $(window)
-    .on(isMousewheelAvailable ? 'mousewheel' : 'scroll', updatePageYOffset)
-    .on('load', updatePageYOffset);
-  function updatePageYOffset() {
+  $(window).on('load DOMMouseScroll keyup keydown mousewheel scroll', function () {
     ik.util.pageYOffset(window.pageYOffset);
-  }
+  });
+  
 
 }(window.ik, window.ko, window.jQuery));
