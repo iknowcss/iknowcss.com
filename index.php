@@ -5,7 +5,7 @@
   <script src="public/js/controller/parallax-header.js"></script>
   <div id="parallax-mirror"
       data-bind="controller: 'parallax-header',
-                 controllerParams: { imgHeight: 1841, imgWidth: 5248 }">
+                 controllerParams: { imgHeight: 1750, imgWidth: 5248 }">
     <img class="slider" src="public/img/sydney-xs.jpg"/>
     <img class="slider" data-bind="attr: { src: sliderSrc }"/>
     <h1 class="title">Cody Jenkins</h1>

@@ -9,12 +9,7 @@
 
     function affixNav(fixed) {
       if (fixed) {
-        $element.css({
-          'position': 'fixed',
-          'margin-top': 0,
-          'top': 0,
-          'background-color': opaqueColor($element.css('background-color'))
-        });
+        $element.css('opacity', 1);
         console.log()
       } else {
         $element.removeAttr('style');
