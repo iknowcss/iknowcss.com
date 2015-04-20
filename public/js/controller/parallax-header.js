@@ -2,33 +2,36 @@
 
   ik.controller.register('parallax-header', function (element) {
 
-    var $element = $(element),
+    var $body = $('body'),
+        $element = $(element),
         slider = $element.find('.slider'),
-        title = $element.find('.title'),
-        scroll = window.pageYOffset;
+        title = $element.find('.title');
 
     function applyParallax() {
-      var offset = window.pageYOffset,
+      var offset = ik.util.pageYOffset(),
           sliderOffset = (offset < 0 ? -offset : -offset / 2),
-          titleOffset = (offset < 0 ? -offset : -offset / (1.5));
+          titleOffset = (offset < 0 ? -offset : -offset / 1.5);
       slider.css('top', sliderOffset + 'px');
       title.css('top', titleOffset + 'px');
     }
 
-    $(window).on(isMousewheelAvailable() ? 'mousewheel' : 'scroll', applyParallax);
-    $(applyParallax);
+    ik.util.pageYOffset.subscribe(applyParallax);
+    slider.on('load', applyParallax);
 
-    function publishSliderHeight() {
-      ko.postbox.publish('parallax-slider-height', slider.height());
+    function repositionBodyForSlider() {
+      var height = slider.height();
+      $body.css('margin-top', height);
+      ko.postbox.publish('parallax-slider-height', height);
     }
 
-    $(window).on('resize', publishSliderHeight);
-    publishSliderHeight();
+    $(window).on('resize', repositionBodyForSlider);
+    slider.on('load', repositionBodyForSlider);
 
+    return {
+      sliderSrc: 'public/img/sydney-xs.jpg'
+    };
   });
 
-  function isMousewheelAvailable() {
-    return !/(iPad|iPhone|iPod)/g.test(navigator.userAgent);
-  }
+  
 
 }(window.ik, window.ko, window.jQuery));

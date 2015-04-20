@@ -63,14 +63,32 @@ time, mark, audio, video {
 @media (min-width: 768px) { #parallax-mirror .title { font-size: 5em; } }
 @media (min-width: 992px) { #parallax-mirror .title { font-size: 7em; } }
 
+/* - Navi ------------------------------------------------------------------- */
+
+#main-nav {
+  width: 100%;
+  position: absolute;
+  margin-top: -3em;
+  background-color: #86aacf;
+  background-color: rgba(134, 170, 207, 0.9);
+  z-index: 100;
+}
+
+#main-nav ul {
+  color: white;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#main-nav li {
+  line-height: 3em;
+}
+
 /* - Main ------------------------------------------------------------------- */
 
 #main-home {
   background-color: #ffffff;
-}
-
-#main-home > section {
-  /*margin-bottom: 10em;*/
 }
 
 /* - Skill ------------------------------------------------------------------ */

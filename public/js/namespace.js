@@ -1,5 +1,7 @@
 (function () {
 
-  window.ik = {};
+  window.ik = {
+    util: {}
+  };
 
 }());

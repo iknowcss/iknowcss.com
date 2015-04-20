@@ -4,13 +4,26 @@
 
   <script src="public/js/controller/parallax-header.js"></script>
   <div id="parallax-mirror" data-bind="controller: 'parallax-header'">
-    <img class="slider" src="public/img/sydney.png"/>
+    <img class="slider" data-bind="attr: { src: sliderSrc }"/>
     <h1 class="title">Cody Jenkins</h1>
   </div>
+
+  <!-- Nav -->
+
+  <script src="public/js/controller/main-nav.js"></script>
+  <nav id="main-nav" data-bind="controller: 'main-nav'">
+    <div class="container"><div class="row">
+      <div class="col-xs-12">
+        <ul>
+          <li>asdf</li>
+        </ul>
+      </div>
+    </div></div>
+  </nav>
+
   <!-- Main -->
 
-  <script src="public/js/controller/main.js"></script>
-  <main id="main-home" data-bind="controller: 'main'">
+  <main id="main-home">
 
   <!-- Portfolio overview -->
 
