@@ -7,6 +7,13 @@
        url('../font/Alike.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'other';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../font/AlexandriaFLF.ttf') format('truetype');
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -47,12 +54,33 @@ time, mark, audio, video {
   left: 0;
 }
 
-#parallax-mirror .title {
-  margin-top: 1em;
+#parallax-mirror .slider-overlay {
   width: 100%;
   position: absolute;
+}
+
+#parallax-mirror .slider-overlay .title {
+  font-size: 1em;
+  margin-top: 1em;
+  margin-bottom: 0;
   color: white;
   text-shadow: 0 0 0.25em rgba(0, 72, 143, 0.75);
+}
+
+#parallax-mirror .slider-overlay .caption {
+  /*background-color: white;*/
+}
+
+#parallax-mirror .slider-overlay .caption .moniker {
+  display: inline-block;
+  font-size: 0.5em;
+  padding: 0.25em 0.5em;
+  box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.75);
+  border-radius: 0.2em;
+  background-color: #3796d3;
+  font-family: other;
+  color: white;
+  font-weight: bold;
 }
 
 /* - Navi ------------------------------------------------------------------- */

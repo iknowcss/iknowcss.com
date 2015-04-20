@@ -7,6 +7,7 @@
         $element = $(element),
         params = ko.unwrap(paramsAccessor),
         slider = $element.find('.slider'),
+        overlay = $element.find('.slider-overlay'),
         title = $element.find('.title');
 
     function applyParallax() {
@@ -14,7 +15,7 @@
           sliderOffset = (offset < 0 ? -offset : -offset / 2),
           titleOffset = (offset < 0 ? -offset : -offset / 1.5);
       slider.css('top', sliderOffset + 'px');
-      title.css('top', titleOffset + 'px');
+      overlay.css('top', titleOffset + 'px');
     }
 
     ik.util.pageYOffset.subscribe(applyParallax);
@@ -23,8 +24,9 @@
     function repositionBodyForSlider() {
       var height = $window.width() * params.imgHeight / params.imgWidth,
           fontSize = height * 0.25;
+      console.log(fontSize)
       $body.css('margin-top', height);
-      title.css('font-size', fontSize + 'px')
+      overlay.css('font-size', fontSize + 'px')
       ko.postbox.publish('parallax-slider-height', height);
     }
 

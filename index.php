@@ -8,7 +8,13 @@
                  controllerParams: { imgHeight: 1750, imgWidth: 5248 }">
     <img class="slider" src="public/img/sydney-xs.jpg"/>
     <img class="slider" data-bind="attr: { src: sliderSrc }"/>
-    <h1 class="title">Cody Jenkins</h1>
+    <div class="slider-overlay">
+      <h1 class="title">Cody Jenkins</h1>
+      <div class="caption"><!--
+     --><div class="moniker" onclick="this.style.backgroundColor = 'rgb(' + Math.ceil(Math.random() * 255) + ',' + Math.ceil(Math.random() * 255) + ',' + Math.ceil(Math.random() * 255) + ')'">iknowCSS</div><!--
+   --></div>
+
+    </div>
   </div>
 
   <!-- Nav -->
@@ -19,7 +25,7 @@
     <div class="container"><div class="row">
       <div class="col-xs-12">
         <ul>
-          <li>iknowCSS</li>
+          <li>Cody Jenkins</li>
         </ul>
       </div>
     </div></div>
