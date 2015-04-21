@@ -5,14 +5,18 @@
   <script src="public/js/controller/parallax-header.js"></script>
   <div id="parallax-mirror"
       data-bind="controller: 'parallax-header',
-                 controllerParams: { imgHeight: 1750, imgWidth: 5248 }">
-    <img class="slider" src="public/img/sydney-xs.jpg"/>
+                 controllerParams: { imgHeight: 2200, imgWidth: 4597 }">
+    <!-- <img class="slider" src="public/img/sydney-xs.jpg"/> -->
     <img class="slider" data-bind="attr: { src: sliderSrc }"/>
     <div class="slider-overlay">
+      <div class="logo">
+        <img src="public/img/logo.png">
+      </div>
       <h1 class="title">Cody Jenkins</h1>
-      <div class="caption"><!--
-     --><div class="moniker" onclick="this.style.backgroundColor = 'rgb(' + Math.ceil(Math.random() * 255) + ',' + Math.ceil(Math.random() * 255) + ',' + Math.ceil(Math.random() * 255) + ')'">iknowCSS</div><!--
-   --></div>
+      <!--<div class="caption">
+        <button>Contact</button>
+        <button>Resume</button>
+      </div>-->
 
     </div>
   </div>
@@ -87,8 +91,7 @@
   <section class="container" data-bind="controller: 'skill-chart'">
     <div class="row">
       <p class="col-xs-12">
-        I've worked with a lot of technology over the years. Here's a brief
-        overview of my experience.
+        
       </p>
     </div>
 

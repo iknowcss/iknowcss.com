@@ -34,7 +34,7 @@
     $(repositionBodyForSlider);
 
     return {
-      sliderSrc: 'public/img/sydney-full.jpg'
+      sliderSrc: 'public/img/potts-full.jpg'
     };
   });
 

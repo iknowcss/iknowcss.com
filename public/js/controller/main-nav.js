@@ -4,7 +4,7 @@
     var $element = $(element),
         sliderHeight = ko.observable().subscribeTo('parallax-slider-height', true);
     var isNavFixed = ko.pureComputed(function () {
-      return sliderHeight() - ik.util.pageYOffset() - $element.height() <= 0;
+      return sliderHeight() - ik.util.pageYOffset() <= 0;
     });
 
     function affixNav(fixed) {
