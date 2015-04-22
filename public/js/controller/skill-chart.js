@@ -21,12 +21,12 @@
     };
 
     // Update the chart when the active group changes
-    vm.activeGroup.subscribe(function (newGroup) {
-      chart.setSkillGroup(newGroup);
-    });
+    // vm.activeGroup.subscribe(function (newGroup) {
+    //   chart.setSkillGroup(newGroup);
+    // });
 
     // Start with the first group
-    vm.activeGroup(groups[0]);
+    // vm.activeGroup(groups[0]);
 
     return vm;
   });

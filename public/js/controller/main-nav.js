@@ -4,13 +4,16 @@
     var $element = $(element),
         sliderHeight = ko.observable().subscribeTo('parallax-slider-height', true);
     var isNavFixed = ko.pureComputed(function () {
-      return sliderHeight() - ik.util.pageYOffset() - $element.height() <= 0;
+      return sliderHeight() - ik.util.pageYOffset() <= 0;
     });
 
     function affixNav(fixed) {
       if (fixed) {
-        $element.css('opacity', 1);
-        console.log()
+        $element.css({
+          'opacity': 1,
+          'position': 'fixed',
+          'top': 0
+        });
       } else {
         $element.removeAttr('style');
       }
