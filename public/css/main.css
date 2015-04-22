@@ -49,7 +49,7 @@ time, mark, audio, video {
 #parallax-mirror .slider-overlay {
   width: 100%;
   position: absolute;
-  margin-top: 0.35em;
+  margin-top: 0.7em;
 }
 
 #parallax-mirror .slider-overlay .logo {
@@ -76,7 +76,7 @@ time, mark, audio, video {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #4a7198;
+  background-color: #cb0000;
   z-index: 100;
   opacity: 0;
   transition: opacity 100ms;
@@ -95,9 +95,21 @@ time, mark, audio, video {
 
 /* - Main ------------------------------------------------------------------- */
 
+body {
+  background-color: #222;
+}
+
 #main-home {
+  background-color: #222;
   padding-top: 3em;
-  background-color: #ffffff;
+  color: #ebebeb;
+  font-size: 18px;
+}
+
+/* - Portfolio -------------------------------------------------------------- */
+
+.portfolio-section hr {
+  width: 3em;
 }
 
 /* - Skill ------------------------------------------------------------------ */

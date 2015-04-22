@@ -5,19 +5,14 @@
   <script src="public/js/controller/parallax-header.js"></script>
   <div id="parallax-mirror"
       data-bind="controller: 'parallax-header',
-                 controllerParams: { imgHeight: 2200, imgWidth: 4597 }">
-    <!-- <img class="slider" src="public/img/sydney-xs.jpg"/> -->
+                 controllerParams: { imgHeight: 1933, imgWidth: 4597 }">
+    <img class="slider" src="public/img/potts-xs.jpg"/>
     <img class="slider" data-bind="attr: { src: sliderSrc }"/>
     <div class="slider-overlay">
       <div class="logo">
-        <img src="public/img/logo.png">
+        <img src="public/img/logo-circle.png">
       </div>
       <h1 class="title">Cody Jenkins</h1>
-      <!--<div class="caption">
-        <button>Contact</button>
-        <button>Resume</button>
-      </div>-->
-
     </div>
   </div>
 
@@ -41,54 +36,124 @@
 
   <!-- Portfolio overview -->
 
-  <section class="container">
+  <section class="portfolio-section container text-center">
     <div class="row">
-      <p class="col-xs-12 text-center">
-        <!-- I love to write code. You have a great idea.<br>
-        Let's build something together -->
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        Hi there! My name is Cody Jenkins. I'm a full-stack web developer.
       </p>
     </div>
+
+    <hr>
+
     <div class="row">
-      <p class="col-xs-12">
-        <!-- I have 10 years of experience developing quality web applications for
-        businesses and individuals. -->
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        I just moved to Sydney from Californa.
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        I'm passionate about quality code and love to turn dreams into reality.
+      </p>
+    </div>
+<!--
+    <hr>
+
+    <div class="row">
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        I'm a tenatious developer; I work with a problem until it's solved.
+        Even when I step away I can't help but think about the problem at hand.
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        I improve code wherever it makes sense.
+        When I find an area that needs improvement, I clean it up so others benefit from it.
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        When I don't know how to do something, I learn it.
+        If my task can benefit from a new technology or skill, I learn what I need and apply it.
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        I communicate easily with everyone, both technical and non-technical.
+        To have a good idea is not enough; others must understand it to embrace it and refine it.
+        I speak to my audience so that everyone understands.
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        I care about the quality of the product and the efficiency of the development process.
+        I write code to solve problems. If it doesn't improve the customer's life, I haven't done my job.
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        I hold myself and others to the standards we set for ourselves.
+        If we slide on our commitments to ourselves, I am not shy about speaking up.
+        It's easier to stay on track when we're honest with ourselves.
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <p class="col-xs-12
+                col-sm-10 col-sm-push-1
+                col-md-8 col-md-push-2">
+        I don't take myself too seriously.
+        I learn more when I make a mistake than when I don't.
+        I'm honest with myself and others when I get it wrong so I can get it right next time.
       </p>
 
-        <!--
-
-        Why am I a great developer?
-
-        - I'm tenatious; I work with a problem until it's solved
-          + Sometimes I struggle to stop for a break
-          + When I do pull away, I can't help but think about the problem at hand
-        - I improve the code wherever it makes sense and where time permits
-          + If I'm confused about a block of code, others likely are, too
-          + When I find an area that needs improvement, I clean it up so others benefit from it
-        - When I don't know how to do something, I learn it
-          + If my task can benefit from a new technology or skill, I learn what I need and apply it
-        - I communicate easily with both technical and non-technical peers
-          + To have a good idea is not enough; others must understand it to embrace it and refine it
-          + Comprehension is crucial to me; I speak to my audience so that everyone understands
-        - I care about the quality of the product and the efficiency of the development process
-          + I write code to solve problems; if it doesn't improve the customer's life, I haven't done my job
-          + If we get tripped up by the same 
-        - I hold myself and others to the standards we set for ourselves
-          + If we slide on our commitments to ourselves, I am not shy about speaking up
-          + It's easier to stay on track when we're honest with ourselves
-        - I don't take myself too seriously
-          + I learn more when I make a mistake than when I don't
-          + I'm honest with myself and others when I get it wrong so I can get it right next time
-
-        -->
-
     </div>
+
+-->
 
   </section>
 
   <!-- Skills chart -->
 
   <script src="public/js/controller/skill-chart.js"></script>
-  <section class="container" data-bind="controller: 'skill-chart'">
+  <section class="container" data-bind="controller: 'skill-chart'" style="display:none">
     <div class="row">
       <p class="col-xs-12">
         
