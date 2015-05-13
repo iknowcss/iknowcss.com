@@ -1,3 +1,129 @@
+/*
+#331e36
+#A0337A
+#6ea4bf
+#c2efeb
+#ecfee8
+*/
+
 body {
-  
+  background-color: #331e36;
+  font-size: 16px;
+}
+
+#intro-content,
+#secondary-content,
+#tertiary-content {
+  color: #ecfee8;
+  font-family: la-belle-aurore;
+}
+
+#intro {
+  font-size: 5em;
+  margin: 0.5em auto 0.5em auto;
+}
+
+#intro span {
+  -webkit-transition: opacity 500ms;
+  transition: opacity 500ms;
+  opacity: 0;
+}
+
+#intro span.viz {
+  opacity: 1;
+}
+
+@-webkit-keyframes bounce {
+  0%   { top: 0em; }
+  50%  { top: 0.25em; }
+  100% { top: 0em; }
+}
+
+@keyframes bounce {
+  0%   { top: 0em; }
+  50%  { top: 0.25em; }
+  100% { top: 0em; }
+}
+
+#scroll-wrapper {
+  position: relative;
+}
+
+#scroll-container {
+  -webkit-transition: 500ms;
+  -webkit-transition-delay: 500ms;
+  transition: 500ms;
+  transition-delay: 500ms;
+  opacity: 0;
+  position: relative;
+  top: 10em;
+}
+
+#scroll-container.viz {
+  opacity: 1;
+  top: 0em;
+}
+
+#scroll-arrow,
+#scroll {
+}
+
+#scroll {
+  opacity: 0.50;
+  font-family: arial;
+  font-size: 1em;
+  letter-spacing: 0.25em;
+}
+
+#scroll-arrow {
+  position: relative;
+  animation-name: bounce;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: bounce;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#secondary-content {
+  font-size: 5em;
+  margin-bottom: 5em;
+}
+
+#wis-1 {
+  margin-top: 2em;
+}
+
+#wis-2 {
+  font-size: 1.5em;
+  color: #FF57B5;
+}
+
+.wis {
+  position: relative;
+  top: 0;
+}
+
+#photo-content-1 {
+  margin-bottom: 0;
+}
+
+.photo {
+  border: 10px solid #eee;
+  box-shadow: 0 0 100px #000;
+}
+
+#tertiary-content {
+  font-size: 5em;
+  margin-bottom: 5em;
+}
+
+#ijwt-1 {
+  margin-top: 3em;
+}
+
+
+#ijwt-2 {
+  font-size: 1.5em;
+  color: #6ea4bf;
 }

@@ -1,0 +1,5 @@
+@font-face {
+  font-family: 'la-belle-aurore';
+  src: url('../font/LaBelleAurore.ttf'); /* IE9 Compat Modes */
+  src: url('../font/LaBelleAurore.ttf') format('truetype');
+}
