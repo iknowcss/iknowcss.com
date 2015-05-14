@@ -161,4 +161,52 @@
     0
   );
 
+  controller.addTween('#ancilary-content',
+    TweenMax.fromTo($('#ky-1'), 1, 
+      { css: { opacity: 0 } },
+      { css: { opacity: 1 } } ),
+    50,
+    0
+  );
+  
+  controller.addTween('#ancilary-content',
+    TweenMax.fromTo($('#ky-1'), 1, 
+      { css: { top: 0 } },
+      { css: { top: 100 } } ),
+    0,
+    0
+  );
+
+  controller.addTween('#ancilary-content',
+    TweenMax.fromTo($('#ky-2'), 1, 
+      { css: { opacity: 0 } },
+      { css: { opacity: 1 } } ),
+    50,
+    100
+  );
+  
+  controller.addTween('#ancilary-content',
+    TweenMax.fromTo($('#ky-2'), 1, 
+      { css: { top: 0 } },
+      { css: { top: 100 } } ),
+    0,
+    100
+  );
+
+  controller.addTween('#ancilary-content',
+    TweenMax.fromTo($('#ky-3'), 1, 
+      { css: { opacity: 0 } },
+      { css: { opacity: 1 } } ),
+    50,
+    200
+  );
+  
+  controller.addTween('#ancilary-content',
+    TweenMax.fromTo($('#ky-3'), 1, 
+      { css: { top: 0 } },
+      { css: { top: 200 } } ),
+    1,
+    200
+  );
+
 }(window.jQuery));
